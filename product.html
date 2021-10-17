@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>products</title>
+</head>
+<body>
+    <style>
+        .fill{
+            background-color: rgba(16, 80, 44, 0.61);
+            margin: 0 auto;
+            width: 50%;
+            border: 1px solid black;
+        text-align: center;
+    }
+    .status{
+        margin: 10px;
+}
+    </style>
+    <div class="fill">
+        <div class="ordering">
+            <h1>Сделайте заказ</h1>
+                <p class="products-p">Продукты</p>
+                <select id="product">
+                <option value="">Овощи</option>
+                <option value="">Фрукты</option>
+                <option value="">Морепродукты</option>
+                </select>
+                <p class="count-p">Кол-во коробок</p>
+                <select id="count">
+                    <option value="">5</option>
+                    <option value="">10</option>
+                    <option value="">15</option>
+                    <option value="">20</option>
+                    <option value="">25</option>
+                </select>
+                <p class="weight-p">Вес</p>
+                <select id="weight">
+                    <option value="">5кг</option>
+                    <option value="">10кг</option>
+                    <option value="">15кг</option>
+                    <option value="">20кг</option>
+                    <option value="">25кг</option>
+                </select>
+                <p class="departure-date-p">Дата отбытия</p>
+                <input class="departure-date" type="date">
+                <p class="arrival-date">Дата доставки</p>
+                <input class="arrival-date" type="date">
+            </div>
+            <div class="submit">
+                <button type="submit">Отправить</button>
+            </div>
+            <div class="status">
+                <button onclick="btn()" id="ask">
+                    STATUS
+                </button>
+            </div>
+      <span id="root"></span>
+    </div>
+    <script>
+        function btn(){
+        fetch("https://reqres.in/api/users",
+    {
+        method: 'POST',
+        headers:{
+            "Content-type":"application/json"
+        },
+        body:JSON.stringify({
+            Status:['на комплектаций','в пути','доставлен'] 
+        })
+    })
+
+    .then(res => res.json())
+    .then(data =>
+        document.getElementById('root').innerHTML =
+        JSON.stringify(data['Status'][Math.floor(Math.random()*data['Status'].length)])
+        )
+    }
+
+    </script>
+</body>
+</html>
